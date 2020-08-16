@@ -1,9 +1,10 @@
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
-import 'package:snapfake/screens/camera_screen.dart';
-import 'package:snapfake/screens/registration_screen.dart';
+import 'package:snapfake/screens/app/page_view.dart';
+import 'file:///E:/Projects/flutter/myapps/snapfake/lib/screens/app/camera_screen.dart';
+import 'package:snapfake/screens/home/registration_screen.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 class HomeScreen extends StatelessWidget {
   static String id = "home_screen";
@@ -75,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       padding: EdgeInsets.symmetric(vertical: 16.0),
                       onPressed: () {
-                        Navigator.pushNamed(context, CameraScreen.id);
+                        Navigator.pushNamed(context, MyPageView.id);
                       },
                       child: Text("Log In"),
                       color: Colors.green,
