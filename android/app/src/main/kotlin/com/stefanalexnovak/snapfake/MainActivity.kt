@@ -1,4 +1,4 @@
-package com.example.snapfake
+package com.stefanalexnovak.snapfake
 
 import io.flutter.embedding.android.FlutterActivity
 
