@@ -17,7 +17,9 @@ class ChatListScreen extends StatelessWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: AddButton(
-          onTap: null,
+          onTap: () {
+            print("New convo clicked");
+          },
         ),
       ),
       body: ListView(
