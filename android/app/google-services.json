@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "207257884238",
+    "firebase_url": "https://snapfake-2f93d.firebaseio.com",
+    "project_id": "snapfake-2f93d",
+    "storage_bucket": "snapfake-2f93d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207257884238:android:cf42bad3ce9a2aedd9551f",
+        "android_client_info": {
+          "package_name": "com.stefanalexnovak.snapfake"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207257884238-s33j7cl4pq6odn9k5lt5arlegtsas45e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi_2NKib5NpTuYdhEvzSeYw_ONAU5tXCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207257884238-s33j7cl4pq6odn9k5lt5arlegtsas45e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
