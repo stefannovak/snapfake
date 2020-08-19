@@ -6,6 +6,7 @@ import 'package:snapfake/screens/app/page_view.dart';
 import 'package:snapfake/screens/app/story_screen.dart';
 import 'package:snapfake/screens/home/home_screen.dart';
 import 'package:snapfake/screens/home/registration_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 //void main() {
 //  runApp(MyApp());
@@ -21,6 +22,8 @@ Future<void> main() async {
 
   // Get a specific camera from the list of available cameras.
   final firstCamera = cameras.first;
+
+  await Firebase.initializeApp();
 
   runApp(
     MaterialApp(
@@ -38,10 +41,6 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-//  final CameraDescription cameraDescription;
-//
-//  MyApp(this.cameraDescription);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

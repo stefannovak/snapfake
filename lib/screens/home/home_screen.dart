@@ -2,7 +2,6 @@ import 'package:bordered_text/bordered_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snapfake/screens/app/page_view.dart';
-import 'file:///E:/Projects/flutter/myapps/snapfake/lib/screens/app/camera_screen.dart';
 import 'package:snapfake/screens/home/registration_screen.dart';
 
 import '../../constants.dart';

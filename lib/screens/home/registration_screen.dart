@@ -15,15 +15,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
   String email;
   String password;
+  String username;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.yellowAccent,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 75.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Flexible(
@@ -35,53 +36,74 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 48.0,
-            ),
-            TextField(
-              keyboardType: TextInputType.emailAddress,
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                //Do something with the user input.
-                email = value;
-              },
-              decoration:
-                  kTextFieldDecoration.copyWith(hintText: "Enter your email"),
-            ),
-            SizedBox(
-              height: 8.0,
-            ),
-            TextField(
-              obscureText: true,
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                //Do something with the user input.
-                password = value;
-              },
-              decoration: kTextFieldDecoration.copyWith(
-                  hintText: "Enter your password"),
-            ),
-            SizedBox(
-              height: 24.0,
-            ),
-            FlatButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32.0),
-              ),
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              onPressed: () async {
-                try {
-                  final newUser = await _auth.createUserWithEmailAndPassword(
-                      email: email, password: password);
-                  if (newUser != null) {
-                    Navigator.pushNamed(context, HomeScreen.id);
-                  }
-                } catch (e) {
-                  print(e);
-                }
-              },
-              child: Text("Register"),
-              color: Colors.redAccent,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                TextField(
+                  keyboardType: TextInputType.text,
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    //Do something with the user input.
+                    setState(() {
+                      username = value;
+                    });
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: "Enter a username"),
+                ),
+                SizedBox(
+                  height: 8.0,
+                ),
+                TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    //Do something with the user input.
+                    email = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: "Enter your email"),
+                ),
+                SizedBox(
+                  height: 8.0,
+                ),
+                TextField(
+                  obscureText: true,
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    //Do something with the user input.
+                    password = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                      hintText: "Enter your password"),
+                ),
+                SizedBox(
+                  height: 24.0,
+                ),
+                FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32.0),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  onPressed: () async {
+                    //TODO MAKE THIS A FUNCTION
+                    try {
+                      final newUser =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: email, password: password);
+                      await newUser.user.updateProfile(displayName: username);
+                      await newUser.user.reload();
+                      if (newUser != null) {
+                        Navigator.pushNamed(context, HomeScreen.id);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
+                  child: Text("Register"),
+                  color: Colors.redAccent,
+                ),
+              ],
             ),
           ],
         ),
