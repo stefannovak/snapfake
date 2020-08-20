@@ -111,8 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         padding: EdgeInsets.symmetric(vertical: 16.0),
                         onPressed: () {
-                          Navigator.pushNamed(context, MyPageView.id);
-//                          logIn();
+//                          Navigator.pushNamed(context, MyPageView.id);
+                          logIn();
                         },
                         child: Text("Log In"),
                         color: Colors.green,
