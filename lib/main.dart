@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:snapfake/screens/app/camera_screen.dart';
+import 'package:snapfake/screens/app/chat_screen.dart';
 import 'package:snapfake/screens/app/chatlist_screen.dart';
 import 'package:snapfake/screens/app/page_view.dart';
 import 'package:snapfake/screens/app/story_screen.dart';
@@ -35,6 +36,7 @@ Future<void> main() async {
         ChatListScreen.id: (context) => ChatListScreen(),
         StoryScreen.id: (context) => StoryScreen(),
         MyPageView.id: (context) => MyPageView(),
+        ChatScreen.id: (context) => ChatScreen(),
       },
     ),
   );

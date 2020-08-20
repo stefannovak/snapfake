@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snapfake/screens/app/chat_screen.dart';
 
 class ChatTile extends StatelessWidget {
   const ChatTile({

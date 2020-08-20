@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const kTextFieldDecoration = InputDecoration(
@@ -23,3 +24,14 @@ const kTitleStyle = TextStyle(
   color: Colors.white,
   letterSpacing: 2.0,
 );
+
+const kMessageTextFieldDecoration = InputDecoration(
+    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+    hintText: 'Send a Chat',
+    border: OutlineInputBorder(
+      borderSide: BorderSide(width: 0, style: BorderStyle.none),
+      borderRadius: BorderRadius.all(
+        Radius.circular(10.0),
+      ),
+    ),
+    filled: true);

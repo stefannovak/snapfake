@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:snapfake/widgets/add_button.dart';
 import 'package:snapfake/widgets/chat_tile.dart';
 
+import 'chat_screen.dart';
+
 class ChatListScreen extends StatelessWidget {
   static String id = "chatlist_screen";
 
@@ -24,7 +26,12 @@ class ChatListScreen extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          ChatTile(),
+          GestureDetector(
+            child: ChatTile(),
+            onTap: () {
+              Navigator.pushNamed(context, ChatScreen.id);
+            },
+          ),
         ],
       ),
     );

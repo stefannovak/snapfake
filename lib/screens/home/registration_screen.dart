@@ -16,6 +16,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String email;
   String password;
   String username;
+  bool showSpinner = false;
+
+  Future registerUser() async {
+    try {
+      final newUser = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      await newUser.user.updateProfile(displayName: username);
+      await newUser.user.reload();
+      if (newUser != null) {
+        Navigator.pushNamed(context, HomeScreen.id);
+      }
+      setState(() {
+        showSpinner = false;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,20 +103,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     borderRadius: BorderRadius.circular(32.0),
                   ),
                   padding: EdgeInsets.symmetric(vertical: 16.0),
-                  onPressed: () async {
-                    //TODO MAKE THIS A FUNCTION
-                    try {
-                      final newUser =
-                          await _auth.createUserWithEmailAndPassword(
-                              email: email, password: password);
-                      await newUser.user.updateProfile(displayName: username);
-                      await newUser.user.reload();
-                      if (newUser != null) {
-                        Navigator.pushNamed(context, HomeScreen.id);
-                      }
-                    } catch (e) {
-                      print(e);
-                    }
+                  onPressed: () {
+                    setState(() {
+                      showSpinner = true;
+                    });
+                    registerUser();
                   },
                   child: Text("Register"),
                   color: Colors.redAccent,
