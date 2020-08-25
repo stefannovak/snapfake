@@ -6,15 +6,30 @@ import 'package:path/path.dart';
 import 'package:snapfake/constants.dart';
 import 'package:snapfake/widgets/add_button.dart';
 import 'package:snapfake/widgets/chat_tile.dart';
+import 'package:firebase_admin/firebase_admin.dart';
 
 import 'chat_screen.dart';
 
-class ChatListScreen extends StatelessWidget {
+class ChatListScreen extends StatefulWidget {
   static String id = "chatlist_screen";
 
+  @override
+  _ChatListScreenState createState() => _ChatListScreenState();
+}
+
+class _ChatListScreenState extends State<ChatListScreen> {
   final messageTextController = TextEditingController();
+
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+
   String userInput;
+
+  List<ChatTile> chats = [
+    ChatTile(name: "Sammie"),
+    ChatTile(name: "Joe"),
+    ChatTile(name: "Anthony"),
+  ];
 
   Future<void> _showMyDialog(BuildContext context) async {
     return showDialog<void>(
@@ -26,15 +41,41 @@ class ChatListScreen extends StatelessWidget {
           content: TextField(
 //            decoration: kTextFieldDecoration,
             onChanged: (value) {
-              userInput = value;
-              print(value);
+              setState(() {
+                userInput = value;
+              });
             },
           ),
           actions: <Widget>[
             FlatButton(
               child: Text('Add'),
-              onPressed: () {
-//                    Navigator.of(context).pop();
+              onPressed: () async {
+                var getUser =
+                    await _firestore.collection('userinfo').doc(userInput);
+
+                getUser.get().then((value) {
+                  if (value.exists) {
+                    print("Document data: ${value.data}");
+                    print(value.get("username"));
+
+                    print("${chats.length}FDLKGJHSFGJKGHFDGKJGHKJFDGG");
+
+                    ///Time to create a new chatlist icon with this data
+                    setState(() {
+                      chats.add(
+                        ChatTile(
+                          name: value.get("username"),
+                        ),
+                      );
+                    });
+                    print(chats.length);
+                  } else {
+                    print("No such document!");
+                  }
+                }).catchError((onError) {
+                  print("Error getting document: $onError");
+                });
+                Navigator.of(context).pop();
               },
             ),
           ],
@@ -57,19 +98,18 @@ class ChatListScreen extends StatelessWidget {
         leading: AddButton(
           onTap: () {
             _showMyDialog(context);
-            print("New convo clicked");
           },
         ),
       ),
-      body: ListView(
-        children: <Widget>[
-          GestureDetector(
-            child: ChatTile(),
-            onTap: () {
-              Navigator.pushNamed(context, ChatScreen.id);
-            },
-          ),
-        ],
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return ChatTile(name: chats[index].name);
+        },
+        itemCount: chats.length,
+//        children: <Widget>[
+//          ChatTile(name: "Test Name"),
+//        ],
+//        children: chats,
       ),
     );
   }

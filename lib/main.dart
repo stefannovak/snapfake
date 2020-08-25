@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:firebase_admin/firebase_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:snapfake/screens/app/camera_screen.dart';
 import 'package:snapfake/screens/app/chat_screen.dart';
@@ -8,6 +9,7 @@ import 'package:snapfake/screens/app/story_screen.dart';
 import 'package:snapfake/screens/home/home_screen.dart';
 import 'package:snapfake/screens/home/registration_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_admin/src/credential.dart';
 
 //void main() {
 //  runApp(MyApp());

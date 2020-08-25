@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snapfake/screens/home/home_screen.dart';
+import 'package:snapfake/user.dart';
 
 import '../../constants.dart';
 
@@ -13,6 +15,8 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+
   String email;
   String password;
   String username;
@@ -24,6 +28,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           email: email, password: password);
       await newUser.user.updateProfile(displayName: username);
       await newUser.user.reload();
+
+      ///Can probably delete the whole MyUser class.
+      ///This opens the firestore 'userinfo' collection and adds
+      ///a new doc, using the username, to store username and email
+      MyUser myUser = MyUser(email: email, username: username);
+      _firestore
+          .collection('userinfo')
+          .doc(username)
+          .set({'email': myUser.email, 'username': myUser.username});
+
       if (newUser != null) {
         Navigator.pushNamed(context, HomeScreen.id);
       }
